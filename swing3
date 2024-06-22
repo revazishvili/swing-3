@@ -1,0 +1,881 @@
+ეს კოდი ქმნის მარტივ ფანჯარას სათაურით "Simple Window". ფანჯრის ზომა არის 300x200 პიქსელი და იხურება პროგრამის დასრულებისას.
+
+
+import javax.swing.*;
+
+public class SimpleWindow {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Simple Window");
+        frame.setSize(300, 200);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+}
+
+
+##################################
+
+ეს მაგალითი ქმნის ფანჯარას ღილაკით. ღილაკზე დაჭერისას გამოჩნდება დიალოგის ფანჯარა შეტყობინებით.
+
+
+import javax.swing.*;
+import java.awt.event.*;
+
+public class ButtonExample {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Button Example");
+        JButton button = new JButton("Click Me");
+        
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frame, "Button Clicked!");
+            }
+        });
+        
+        frame.add(button);
+        frame.setSize(300, 200);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+}
+
+
+########################
+ეს მაგალითი აჩვენებს ტექსტის ველის გამოყენებას. მომხმარებელს შეუძლია ტექსტის შეყვანა და ღილაკზე დაჭერით ნახავს შეყვანილ ტექსტს.
+
+
+import javax.swing.*;
+import java.awt.event.*;
+
+public class TextFieldExample {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("TextField Example");
+        JTextField textField = new JTextField(20);
+        JButton button = new JButton("Submit");
+        
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String text = textField.getText();
+                JOptionPane.showMessageDialog(frame, "You entered: " + text);
+            }
+        });
+        
+        frame.setLayout(new java.awt.FlowLayout());
+        frame.add(textField);
+        frame.add(button);
+        frame.setSize(300, 100);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+}
+
+
+#######################
+
+ეს კოდი ქმნის მარტივ მენიუს "File" პუნქტით, რომელშიც სამი ქვეპუნქტია: "New", "Open" და "Save".
+
+import javax.swing.*;
+
+public class MenuExample {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Menu Example");
+        JMenuBar menuBar = new JMenuBar();
+        
+        JMenu fileMenu = new JMenu("File");
+        JMenuItem newItem = new JMenuItem("New");
+        JMenuItem openItem = new JMenuItem("Open");
+        JMenuItem saveItem = new JMenuItem("Save");
+        
+        fileMenu.add(newItem);
+        fileMenu.add(openItem);
+        fileMenu.add(saveItem);
+        
+        menuBar.add(fileMenu);
+        frame.setJMenuBar(menuBar);
+        
+        frame.setSize(300, 200);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+}
+
+
+############################
+
+ეს მაგალითი აჩვენებს ჩამოსაშლელი სიის გამოყენებას. მომხმარებელს შეუძლია აირჩიოს ხილი და არჩევისას გამოჩნდება შეტყობინება.
+
+import javax.swing.*;
+import java.awt.event.*;
+
+public class ComboBoxExample {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("ComboBox Example");
+        String[] choices = {"Apple", "Banana", "Cherry", "Date"};
+        JComboBox<String> comboBox = new JComboBox<>(choices);
+        
+        comboBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String selectedFruit = (String) comboBox.getSelectedItem();
+                JOptionPane.showMessageDialog(frame, "You selected: " + selectedFruit);
+            }
+        });
+        
+        frame.add(comboBox);
+        frame.setSize(300, 100);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+}
+
+
+################################
+ეს კოდი ქმნის მონიშვნის ყუთს. მომხმარებელს შეუძლია მონიშნოს ან გააუქმოს მონიშვნა, რაზეც პროგრამა რეაგირებს შეტყობინებით.
+
+
+
+import javax.swing.*;
+import java.awt.event.*;
+
+public class CheckBoxExample {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("CheckBox Example");
+        JCheckBox checkBox = new JCheckBox("I agree to the terms");
+        
+        checkBox.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    JOptionPane.showMessageDialog(frame, "You agreed to the terms.");
+                } else {
+                    JOptionPane.showMessageDialog(frame, "You disagreed to the terms.");
+                }
+            }
+        });
+        
+        frame.add(checkBox);
+        frame.setSize(300, 100);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+}
+
+
+#####################
+
+ეს მაგალითი აჩვენებს რადიო ღილაკების გამოყენებას. მომხმარებელს შეუძლია აირჩიოს ერთ-ერთი ვარიანტი და არჩევისას გამოჩნდება შეტყობინება.
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class RadioButtonExample {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("RadioButton Example");
+        JRadioButton maleButton = new JRadioButton("Male");
+        JRadioButton femaleButton = new JRadioButton("Female");
+        
+        ButtonGroup group = new ButtonGroup();
+        group.add(maleButton);
+        group.add(femaleButton);
+        
+        ActionListener listener = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JRadioButton button = (JRadioButton) e.getSource();
+                JOptionPane.showMessageDialog(frame, "You selected: " + button.getText());
+            }
+        };
+        
+        maleButton.addActionListener(listener);
+        femaleButton.addActionListener(listener);
+        
+        frame.setLayout(new FlowLayout());
+        frame.add(maleButton);
+        frame.add(femaleButton);
+        frame.setSize(300, 100);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+}
+
+
+#############
+
+ეს კოდი ქმნის სლაიდერს, რომლის მნიშვნელობა იცვლება 0-დან 100-მდე. სლაიდერის გადაადგილებისას იცვლება ლეიბლის ტექსტი.
+
+
+import javax.swing.*;
+import javax.swing.event.*;
+
+public class SliderExample {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Slider Example");
+        JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
+        JLabel label = new JLabel("Value: 50");
+        
+        slider.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                label.setText("Value: " + slider.getValue());
+            }
+        });
+        
+        frame.setLayout(new java.awt.FlowLayout());
+        frame.add(slider);
+        frame.add(label);
+        frame.setSize(300, 100);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+}
+
+
+##################
+
+ეს მაგალითი აჩვენებს პროგრეს ბარის გამოყენებას. ღილაკზე დაჭერით იწყება პროგრესის ზრდა 0-დან 100%-მდე.
+
+
+
+
+import javax.swing.*;
+import java.awt.event.*;
+
+public class ProgressBarExample {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("ProgressBar Example");
+        JProgressBar progressBar = new JProgressBar(0, 100);
+        JButton startButton = new JButton("Start");
+        
+        startButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                new Thread(new Runnable() {
+                    public void run() {
+                        for (int i = 0; i <= 100; i++) {
+                            final int progress = i;
+                            SwingUtilities.invokeLater(new Runnable() {
+                                public void run() {
+                                    progressBar.setValue(progress);
+                                }
+                            });
+                            try {
+                                Thread.sleep(50);
+                            } catch (InterruptedException ex) {}
+                        }
+                    }
+                }).start();
+            }
+        });
+        
+        frame.setLayout(new java.awt.FlowLayout());
+        frame.add(progressBar);
+        frame.add(startButton);
+        frame.setSize(300, 100);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+}
+
+
+
+##################
+
+
+ეს კოდი ქმნის ტექსტის არეს, სადაც მომხმარებელს შეუძლია ტექსტის შეყვანა. ღილაკზე დაჭერით ითვლება შეყვანილი სიტყვების რაოდენობა.
+
+
+
+
+import javax.swing.*;
+import java.awt.event.*;
+
+public class TextAreaExample {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("TextArea Example");
+        JTextArea textArea = new JTextArea(5, 20);
+        JButton countButton = new JButton("Count Words");
+        
+        countButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String text = textArea.getText();
+                String[] words = text.split("\\s+");
+                JOptionPane.showMessageDialog(frame, "Word count: " + words.length);
+            }
+        });
+        
+        frame.setLayout(new java.awt.FlowLayout());
+        frame.add(new JScrollPane(textArea));
+        frame.add(countButton);
+        frame.setSize(300, 200);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+}
+
+
+#################################
+
+ეს არის მარტივი კალკულატორის აპლიკაცია, რომელიც ასრულებს ძირითად არითმეტიკულ ოპერაციებს.
+
+
+
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class Calculator extends JFrame {
+    private JTextField display;
+    private double result = 0;
+    private String lastCommand = "=";
+    private boolean start = true;
+
+    public Calculator() {
+        setTitle("Calculator");
+        setSize(300, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        display = new JTextField("0");
+        display.setEditable(false);
+        add(display, BorderLayout.NORTH);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(4, 4));
+
+        String[] buttons = {
+            "7", "8", "9", "/",
+            "4", "5", "6", "*",
+            "1", "2", "3", "-",
+            "0", ".", "=", "+"
+        };
+
+        for (String button : buttons) {
+            addButton(panel, button);
+        }
+
+        add(panel, BorderLayout.CENTER);
+    }
+
+    private void addButton(Container c, String s) {
+        JButton button = new JButton(s);
+        c.add(button);
+        button.addActionListener(new ButtonListener());
+    }
+
+    private class ButtonListener implements ActionListener {
+        public void actionPerformed(ActionEvent event) {
+            String command = event.getActionCommand();
+            if (command.charAt(0) >= '0' && command.charAt(0) <= '9' || command.equals(".")) {
+                if (start) {
+                    display.setText(command);
+                    start = false;
+                } else {
+                    display.setText(display.getText() + command);
+                }
+            } else {
+                if (start) {
+                    if (command.equals("-")) {
+                        display.setText(command);
+                        start = false;
+                    } else {
+                        lastCommand = command;
+                    }
+                } else {
+                    calculate(Double.parseDouble(display.getText()));
+                    lastCommand = command;
+                    start = true;
+                }
+            }
+        }
+    }
+
+    public void calculate(double x) {
+        if (lastCommand.equals("+")) result += x;
+        else if (lastCommand.equals("-")) result -= x;
+        else if (lastCommand.equals("*")) result *= x;
+        else if (lastCommand.equals("/")) result /= x;
+        else if (lastCommand.equals("=")) result = x;
+        display.setText("" + result);
+    }
+
+    public static void main(String[] args) {
+        Calculator calc = new Calculator();
+        calc.setVisible(true);
+    }
+}
+
+
+#######################
+
+ეს აპლიკაცია საშუალებას აძლევს მომხმარებელს დახატოს სხვადასხვა ფორმები (ხაზები, მართკუთხედები, ოვალები) სხვადასხვა ფერებში.
+
+
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+
+public class DrawingApp extends JFrame {
+    private ArrayList<Shape> shapes = new ArrayList<>();
+    private Color currentColor = Color.BLACK;
+    private int currentShape = 0; // 0: Line, 1: Rectangle, 2: Oval
+
+    public DrawingApp() {
+        setTitle("Drawing App");
+        setSize(800, 600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel controlPanel = new JPanel();
+        String[] shapeOptions = {"Line", "Rectangle", "Oval"};
+        JComboBox<String> shapeChooser = new JComboBox<>(shapeOptions);
+        JButton colorButton = new JButton("Choose Color");
+        JButton clearButton = new JButton("Clear");
+
+        controlPanel.add(shapeChooser);
+        controlPanel.add(colorButton);
+        controlPanel.add(clearButton);
+
+        add(controlPanel, BorderLayout.NORTH);
+
+        DrawingPanel drawingPanel = new DrawingPanel();
+        add(drawingPanel, BorderLayout.CENTER);
+
+        shapeChooser.addActionListener(e -> currentShape = shapeChooser.getSelectedIndex());
+
+        colorButton.addActionListener(e -> {
+            Color newColor = JColorChooser.showDialog(this, "Choose Color", currentColor);
+            if (newColor != null) {
+                currentColor = newColor;
+            }
+        });
+
+        clearButton.addActionListener(e -> {
+            shapes.clear();
+            drawingPanel.repaint();
+        });
+    }
+
+    private class DrawingPanel extends JPanel {
+        private Point startPoint;
+
+        public DrawingPanel() {
+            setBackground(Color.WHITE);
+            
+            MouseAdapter adapter = new MouseAdapter() {
+                public void mousePressed(MouseEvent e) {
+                    startPoint = e.getPoint();
+                }
+
+                public void mouseReleased(MouseEvent e) {
+                    Shape shape = null;
+                    switch (currentShape) {
+                        case 0: // Line
+                            shape = new Line(startPoint, e.getPoint(), currentColor);
+                            break;
+                        case 1: // Rectangle
+                            shape = new Rectangle(startPoint, e.getPoint(), currentColor);
+                            break;
+                        case 2: // Oval
+                            shape = new Oval(startPoint, e.getPoint(), currentColor);
+                            break;
+                    }
+                    shapes.add(shape);
+                    repaint();
+                }
+            };
+
+            addMouseListener(adapter);
+            addMouseMotionListener(adapter);
+        }
+
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            for (Shape shape : shapes) {
+                shape.draw(g);
+            }
+        }
+    }
+
+    private interface Shape {
+        void draw(Graphics g);
+    }
+
+    private class Line implements Shape {
+        Point start, end;
+        Color color;
+
+        Line(Point start, Point end, Color color) {
+            this.start = start;
+            this.end = end;
+            this.color = color;
+        }
+
+        public void draw(Graphics g) {
+            g.setColor(color);
+            g.drawLine(start.x, start.y, end.x, end.y);
+        }
+    }
+
+    private class Rectangle implements Shape {
+        Point start, end;
+        Color color;
+
+        Rectangle(Point start, Point end, Color color) {
+            this.start = start;
+            this.end = end;
+            this.color = color;
+        }
+
+        public void draw(Graphics g) {
+            g.setColor(color);
+            g.drawRect(Math.min(start.x, end.x), Math.min(start.y, end.y),
+                       Math.abs(start.x - end.x), Math.abs(start.y - end.y));
+        }
+    }
+
+    private class Oval implements Shape {
+        Point start, end;
+        Color color;
+
+        Oval(Point start, Point end, Color color) {
+            this.start = start;
+            this.end = end;
+            this.color = color;
+        }
+
+        public void draw(Graphics g) {
+            g.setColor(color);
+            g.drawOval(Math.min(start.x, end.x), Math.min(start.y, end.y),
+                       Math.abs(start.x - end.x), Math.abs(start.y - end.y));
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new DrawingApp().setVisible(true));
+    }
+}
+
+
+############################
+
+ეს არის მარტივი ფაილების მენეჯერი, რომელიც საშუალებას აძლევს მომხმარებელს დაათვალიეროს ფაილური სისტემა.
+
+
+
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.File;
+
+public class FileManager extends JFrame {
+    private JTextField pathField;
+    private JList<String> fileList;
+    private DefaultListModel<String> listModel;
+
+    public FileManager() {
+        setTitle("File Manager");
+        setSize(600, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel topPanel = new JPanel(new BorderLayout());
+        pathField = new JTextField();
+        JButton goButton = new JButton("Go");
+        topPanel.add(pathField, BorderLayout.CENTER);
+        topPanel.add(goButton, BorderLayout.EAST);
+
+        listModel = new DefaultListModel<>();
+        fileList = new JList<>(listModel);
+        JScrollPane scrollPane = new JScrollPane(fileList);
+
+        add(topPanel, BorderLayout.NORTH);
+        add(scrollPane, BorderLayout.CENTER);
+
+        goButton.addActionListener(e -> loadDirectory(pathField.getText()));
+        fileList.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    String selectedItem = fileList.getSelectedValue();
+                    File selected = new File(pathField.getText(), selectedItem);
+                    if (selected.isDirectory()) {
+                        loadDirectory(selected.getAbsolutePath());
+                    }
+                }
+            }
+        });
+
+        loadDirectory(System.getProperty("user.home"));
+    }
+
+    private void loadDirectory(String path) {
+        File dir = new File(path);
+        if (dir.isDirectory()) {
+            pathField.setText(dir.getAbsolutePath());
+            listModel.clear();
+            for (File file : dir.listFiles()) {
+                listModel.addElement(file.getName());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid directory", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new FileManager().setVisible(true));
+    }
+}
+
+
+
+############################
+
+ეს არის მარტივი ტექსტის რედაქტორი ფაილების გახსნისა და შენახვის ფუნქციონალით.
+
+
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+
+public class TextEditor extends JFrame {
+    private JTextArea textArea;
+    private JFileChooser fileChooser;
+
+    public TextEditor() {
+        setTitle("Text Editor");
+        setSize(800, 600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        textArea = new JTextArea();
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        add(scrollPane, BorderLayout.CENTER);
+
+        JMenuBar menuBar = new JMenuBar();
+        JMenu fileMenu = new JMenu("File");
+        JMenuItem newMenuItem = new JMenuItem("New");
+        JMenuItem openMenuItem = new JMenuItem("Open");
+        JMenuItem saveMenuItem = new JMenuItem("Save");
+        JMenuItem exitMenuItem = new JMenuItem("Exit");
+
+        fileMenu.add(newMenuItem);
+        fileMenu.add(openMenuItem);
+        fileMenu.add(saveMenuItem);
+        fileMenu.addSeparator();
+        fileMenu.add(exitMenuItem);
+        menuBar.add(fileMenu);
+        setJMenuBar(menuBar);
+
+        fileChooser = new JFileChooser();
+
+        newMenuItem.addActionListener(e -> textArea.setText(""));
+        openMenuItem.addActionListener(e -> openFile());
+        saveMenuItem.addActionListener(e -> saveFile());
+        exitMenuItem.addActionListener(e -> System.exit(0));
+    }
+
+    private void openFile() {
+        int returnVal = fileChooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                textArea.read(reader, null);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "Error reading file", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private void saveFile() {
+        int returnVal = fileChooser.showSaveDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                textArea.write(writer);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "Error saving file", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new TextEditor().setVisible(true));
+    }
+}
+
+
+
+########################
+
+ეს კოდი ქმნის ჭადრაკის დაფას საწყისი პოზიციით.
+
+
+
+
+import javax.swing.*;
+import java.awt.*;
+
+public class ChessBoard extends JFrame {
+    private static final int BOARD_SIZE = 8;
+    private static final int SQUARE_SIZE = 75;
+
+    public ChessBoard() {
+        setTitle("Chess Board");
+        setSize(BOARD_SIZE * SQUARE_SIZE, BOARD_SIZE * SQUARE_SIZE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new GridLayout(BOARD_SIZE, BOARD_SIZE));
+
+        for (int row = 0; row < BOARD_SIZE; row++) {
+            for (int col = 0; col < BOARD_SIZE; col++) {
+                JPanel square = new JPanel();
+                square.setBackground((row + col) % 2 == 0 ? Color.WHITE : Color.BLACK);
+                add(square);
+
+                if ((row == 0 || row == 7) && (col == 0 || col == 7)) {
+                    addPiece(square, "R", row < 4 ? Color.BLACK : Color.WHITE);
+                } else if ((row == 0 || row == 7) && (col == 1 || col == 6)) {
+                    addPiece(square, "N", row < 4 ? Color.BLACK : Color.WHITE);
+                } else if ((row == 0 || row == 7) && (col == 2 || col == 5)) {
+                    addPiece(square, "B", row < 4 ? Color.BLACK : Color.WHITE);
+                } else if ((row == 0 || row == 7) && col == 3) {
+                    addPiece(square, "Q", row < 4 ? Color.BLACK : Color.WHITE);
+                } else if ((row == 0 || row == 7) && col == 4) {
+                    addPiece(square, "K", row < 4 ? Color.BLACK : Color.WHITE);
+                } else if (row == 1 || row == 6) {
+                    addPiece(square, "P", row < 4 ? Color.BLACK : Color.WHITE);
+                }
+            }
+        }
+    }
+
+    private void addPiece(JPanel square, String piece, Color color) {
+        JLabel label = new JLabel(piece, SwingConstants.CENTER);
+        label.setForeground(color);
+        label.setFont(new Font("Serif", Font.BOLD, 40));
+        square.add(label);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new ChessBoard().setVisible(true));
+    }
+}
+
+##################
+
+შაში
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class CheckersGame extends JFrame {
+    private static final int BOARD_SIZE = 8;
+    private static final int SQUARE_SIZE = 75;
+
+    private JButton[][] board = new JButton[BOARD_SIZE][BOARD_SIZE];
+    private boolean isWhiteTurn = true;
+    private JButton selectedPiece = null;
+
+    public CheckersGame() {
+        setTitle("Checkers Game");
+        setSize(BOARD_SIZE * SQUARE_SIZE, BOARD_SIZE * SQUARE_SIZE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new GridLayout(BOARD_SIZE, BOARD_SIZE));
+
+        initializeBoard();
+    }
+
+    private void initializeBoard() {
+        for (int row = 0; row < BOARD_SIZE; row++) {
+            for (int col = 0; col < BOARD_SIZE; col++) {
+                JButton square = new JButton();
+                square.setPreferredSize(new Dimension(SQUARE_SIZE, SQUARE_SIZE));
+                square.setBackground((row + col) % 2 == 0 ? Color.LIGHT_GRAY : Color.DARK_GRAY);
+                
+                if ((row + col) % 2 != 0) {
+                    if (row < 3) {
+                        square.setText("B");
+                    } else if (row > 4) {
+                        square.setText("W");
+                    }
+                }
+
+                square.addActionListener(new SquareClickListener(row, col));
+                board[row][col] = square;
+                add(square);
+            }
+        }
+    }
+
+    private class SquareClickListener implements ActionListener {
+        private int row, col;
+
+        public SquareClickListener(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JButton clickedSquare = (JButton) e.getSource();
+
+            if (selectedPiece == null) {
+                if (!clickedSquare.getText().isEmpty() &&
+                    (isWhiteTurn && clickedSquare.getText().equals("W") ||
+                    !isWhiteTurn && clickedSquare.getText().equals("B"))) {
+                    selectedPiece = clickedSquare;
+                    clickedSquare.setBackground(Color.YELLOW);
+                }
+            } else {
+                if (isValidMove(selectedPiece, clickedSquare)) {
+                    movePiece(selectedPiece, clickedSquare);
+                    isWhiteTurn = !isWhiteTurn;
+                }
+                selectedPiece.setBackground((row + col) % 2 == 0 ? Color.LIGHT_GRAY : Color.DARK_GRAY);
+                selectedPiece = null;
+            }
+        }
+    }
+
+    private boolean isValidMove(JButton from, JButton to) {
+        int fromRow = -1, fromCol = -1, toRow = -1, toCol = -1;
+
+        // Find the positions of the 'from' and 'to' buttons
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            for (int j = 0; j < BOARD_SIZE; j++) {
+                if (board[i][j] == from) {
+                    fromRow = i;
+                    fromCol = j;
+                }
+                if (board[i][j] == to) {
+                    toRow = i;
+                    toCol = j;
+                }
+            }
+        }
+
+        // Check if the move is diagonal and one square away
+        if (Math.abs(fromRow - toRow) == 1 && Math.abs(fromCol - toCol) == 1) {
+            return to.getText().isEmpty();
+        }
+
+        return false;
+    }
+
+    private void movePiece(JButton from, JButton to) {
+        to.setText(from.getText());
+        from.setText("");
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new CheckersGame().setVisible(true));
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
